@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-key="page_title">Jalmitra - Rooftop Rainwater Harvesting Assessment</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="header-brand">
+                    <h1 class="header-title" data-key="header_title">Jalmitra</h1>
+                    <p class="header-subtitle" data-key="header_subtitle">Ministry of Jal Shakti - Rooftop Rainwater Harvesting Assessment</p>
+                </div>
+                <div class="language-selector">
+                    <select id="languageSelect" class="form-control">
+                        <option value="english">English</option>
+                        <option value="hindi">हिंदी</option>
+                        <option value="bengali">বাংলা</option>
+                        <option value="tamil">தமிழ்</option>
+                        <option value="telugu">తెలుగు</option>
+                        <option value="marathi">मराठी</option>
+                        <option value="gujarati">ગુજરાતી</option>
+                        <option value="kannada">ಕನ್ನಡ</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Assessment Form -->
+            <section id="assessmentForm" class="assessment-form">
+                <div class="card">
+                    <div class="card__header">
+                        <h2 data-key="assessment_form">Assessment Form</h2>
+                    </div>
+                    <div class="card__body">
+                        <form id="rwcForm">
+                            <!-- Location Details -->
+                            <div class="form-section">
+                                <h3 data-key="location_details">Location Details</h3>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label for="state" data-key="state">State</label>
+                                        <select id="state" class="form-control" required>
+                                            <option value="">Select State</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="district" data-key="district">District</label>
+                                        <input type="text" id="district" class="form-control" placeholder="Enter district">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Property Information -->
+                            <div class="form-section">
+                                <h3 data-key="property_info">Property Information</h3>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label for="propertyType">Property Type</label>
+                                        <select id="propertyType" class="form-control">
+                                            <option value="residential">Residential</option>
+                                            <option value="commercial">Commercial</option>
+                                            <option value="institutional">Institutional</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="rooftopArea" data-key="rooftop_area">Rooftop Area (m²)</label>
+                                        <input type="number" id="rooftopArea" class="form-control" min="10" max="10000" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="roofMaterial" data-key="roof_material">Roof Material</label>
+                                        <select id="roofMaterial" class="form-control">
+                                            <option value="RCC">RCC (Reinforced Concrete)</option>
+                                            <option value="Asbestos">Asbestos Sheets</option>
+                                            <option value="Tin Sheets">Tin/Metal Sheets</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="occupants" data-key="occupants">Number of Occupants</label>
+                                        <input type="number" id="occupants" class="form-control" min="1" max="500">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Auto-Detected Site Conditions -->
+                            <div class="form-section">
+                                <h3 data-key="site_conditions">Site Conditions (Auto-Detected)</h3>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label data-key="water_table">Water Table Depth</label>
+                                        <div class="auto-detected-field">
+                                            <input type="text" id="waterTableDepth" class="form-control" readonly>
+                                            <span class="auto-badge" data-key="auto_detected">Auto-detected based on location</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label data-key="soil_type">Soil Type</label>
+                                        <div class="auto-detected-field">
+                                            <input type="text" id="soilType" class="form-control" readonly>
+                                            <span class="auto-badge" data-key="auto_detected">Auto-detected based on location</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Usage Requirements -->
+                            <div class="form-section">
+                                <h3 data-key="usage_requirements">Usage Requirements</h3>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label for="dailyRequirement" data-key="daily_requirement">Daily Water Requirement (L)</label>
+                                        <input type="number" id="dailyRequirement" class="form-control" min="50" max="10000" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="primaryUse">Primary Use</label>
+                                        <select id="primaryUse" class="form-control">
+                                            <option value="domestic">Domestic</option>
+                                            <option value="irrigation">Irrigation</option>
+                                            <option value="industrial">Industrial</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="form-actions">
+                                <button type="submit" class="btn-primary" data-key="calculate">Calculate Assessment</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Processing Animation -->
+            <section id="processingSection" class="processing-section" style="display: none;">
+                <div class="card">
+                    <div class="card__body">
+                        <div class="processing-animation">
+                            <div class="spinner"></div>
+                            <h3 data-key="processing">Processing Assessment...</h3>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progressFill"></div>
+                            </div>
+                            <div class="processing-steps">
+                                <div class="step" data-step="1">Analyzing location data</div>
+                                <div class="step" data-step="2">Calculating water availability</div>
+                                <div class="step" data-step="3">Assessing feasibility</div>
+                                <div class="step" data-step="4">Determining optimal structure</div>
+                                <div class="step" data-step="5">Generating recommendations</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section id="resultsSection" class="results-section" style="display: none;">
+                <div class="card">
+                    <div class="card__header">
+                        <h2 data-key="assessment_report">Assessment Report</h2>
+                        <div class="feasibility-badge" id="feasibilityBadge">
+                            <span data-key="feasible">System Feasible</span>
+                        </div>
+                    </div>
+                    <div class="card__body">
+                        <!-- Summary Cards -->
+                        <div class="summary-grid">
+                            <div class="summary-card">
+                                <h3>Annual Rainfall</h3>
+                                <div class="summary-value" id="annualRainfall">0 mm</div>
+                            </div>
+                            <div class="summary-card">
+                                <h3>Daily Water Available</h3>
+                                <div class="summary-value" id="dailyAvailable">0 L</div>
+                            </div>
+                            <div class="summary-card">
+                                <h3>Daily Requirement</h3>
+                                <div class="summary-value" id="dailyReq">0 L</div>
+                            </div>
+                            <div class="summary-card">
+                                <h3>Estimated Cost</h3>
+                                <div class="summary-value" id="estimatedCost">₹0</div>
+                            </div>
+                        </div>
+
+                        <!-- Installation Recommendation -->
+                        <div class="result-section">
+                            <h3 data-key="installation_recommendation">Recommended Installation Type</h3>
+                            <div class="installation-recommendation">
+                                <div class="recommendation-card">
+                                    <div class="recommendation-header">
+                                        <h4 id="recommendedStructure">Recharge Pit</h4>
+                                        <div class="recommendation-badge">Optimal Choice</div>
+                                    </div>
+                                    <div class="recommendation-details">
+                                        <div class="detail-row">
+                                            <span class="detail-label">Structure Type:</span>
+                                            <span class="detail-value" id="structureType">Surface Recharge</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="detail-label">Space Required:</span>
+                                            <span class="detail-value" id="spaceRequired">4-6 m²</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="detail-label">Maintenance Level:</span>
+                                            <span class="detail-value" id="maintenanceLevel">Low</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="detail-label">Water Table Suitability:</span>
+                                            <span class="detail-value" id="suitability">Shallow (≤2.5m)</span>
+                                        </div>
+                                    </div>
+                                    <div class="recommendation-reasons">
+                                        <h5>Why This Structure is Recommended:</h5>
+                                        <ul id="reasonsList">
+                                            <!-- Populated dynamically -->
+                                        </ul>
+                                    </div>
+                                    <div class="alternatives">
+                                        <h5>Alternative Options:</h5>
+                                        <div id="alternativesList">
+                                            <!-- Populated dynamically -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Technical Specifications -->
+                        <div class="result-section">
+                            <h3>Technical Specifications</h3>
+                            <div class="spec-grid">
+                                <div class="spec-item">
+                                    <span class="spec-label">Structure Diameter/Length:</span>
+                                    <span class="spec-value" id="structureDimension">0 m</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">Structure Depth:</span>
+                                    <span class="spec-value" id="structureDepth">0 m</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">Structure Volume:</span>
+                                    <span class="spec-value" id="structureVolume">0 m³</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">Annual Runoff Capacity:</span>
+                                    <span class="spec-value" id="annualRunoff">0 L</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Cost Breakdown -->
+                        <div class="result-section">
+                            <h3>Cost Breakdown</h3>
+                            <div class="cost-breakdown">
+                                <div class="cost-item">
+                                    <span>Material Cost:</span>
+                                    <span id="materialCost">₹0</span>
+                                </div>
+                                <div class="cost-item">
+                                    <span>Labor Cost (30%):</span>
+                                    <span id="laborCost">₹0</span>
+                                </div>
+                                <div class="cost-item">
+                                    <span>Contingency (20%):</span>
+                                    <span id="contingencyCost">₹0</span>
+                                </div>
+                                <div class="cost-item total">
+                                    <span><strong>Total Cost:</strong></span>
+                                    <span id="totalCost"><strong>₹0</strong></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Implementation Guidelines -->
+                        <div class="result-section">
+                            <h3>Implementation Guidelines</h3>
+                            <div class="guidelines">
+                                <ol id="implementationSteps">
+                                    <li>Obtain necessary permits from local authorities</li>
+                                    <li>Mark the location for structure installation</li>
+                                    <li>Excavate to the required depth with proper safety measures</li>
+                                    <li>Install filter media layers as per specifications</li>
+                                    <li>Connect rooftop drainage to the recharge structure</li>
+                                    <li>Install overflow arrangements and maintenance access</li>
+                                    <li>Test the system during first monsoon</li>
+                                    <li>Establish regular maintenance schedule</li>
+                                </ol>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="result-actions">
+                            <button class="btn-secondary" onclick="window.print()">Print Report</button>
+                            <button class="btn-primary" onclick="resetForm()">New Assessment</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Ministry of Jal Shakti, Government of India. All rights reserved.</p>
+            <p>For technical support, contact: <a href="mailto:support@jalshakti.gov.in">support@jalshakti.gov.in</a></p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
